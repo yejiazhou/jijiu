@@ -17,20 +17,6 @@
         <source src="../assets/jijiuche.wav">
         <track kind="captions" src="your-empty-captions-file.vtt" srclang="en" label="English Captions">
   </audio>
-
-  <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
-:src="wavAudio"
-style="top:0px;position:absolute;z-index:2;left:0px"></iframe> -->
-
-  <!-- <iframe
-    
-        
-        frameborder="0"
-        wmode="transparent | window"
-        style="opacity: 0.0.1;"
-    ></iframe> -->
-    <!-- <iframe  allow = "autoplay" title="这里是 iframe 内容的描述"/> -->
-    <!-- <iframe allow="autoplay" hidden src="../assets/jijiuche.wav"></iframe> -->
   </el-row>
 </template>
 
@@ -49,7 +35,6 @@ import appStore from '@/store/index';
 import ShareClient from '@/utils/shareClient';
 import { useRouter } from "vue-router";
 import TencentCloudChat from '@tencentcloud/chat';
-import {Howl, Howler} from 'howler';
 
 
 let options = {
@@ -78,9 +63,17 @@ let onMessageReceived = function(event) {
   messageList.forEach((message) => {
     if (message.type === TencentCloudChat.TYPES.MSG_TEXT) {
       // 文本消息 - https://web.sdk.qcloud.com/im/doc/v3/zh-cn/Message.html#.TextPayload
-      console.log('文本消息',JSON.parse(event?.data[0].payload.text).data);
-      whetherFirstAidOrNnot.value = true
-      roomId.value = JSON.parse(event?.data[0].payload.text).data
+      console.log('文本消息文本消息',JSON.parse(event?.data[0].payload.text).data);
+      if(JSON.parse(event?.data[0].payload.text).data=='医院收到消息'){
+          // 先离开房间
+        ($bus as any).emit('LeaveTheRoom', event);
+          // 再发送房间号过去
+        ($bus as any).emit('SendTheRoomNumber', event);
+      }else{
+            whetherFirstAidOrNnot.value = true
+            roomId.value = JSON.parse(event?.data[0].payload.text).data
+      }
+
       // store.roomId = roomId.value  
       // console.log(store.roomId,'roomIdvalue');
       
@@ -123,23 +116,19 @@ let onMessageReceived = function(event) {
     }
   });
 };
-// var sound = new Howl({
-//   src: [wavAudio],
-//   loop: true,
-// });
-// sound.play();  
+ 
 chat.on(TencentCloudChat.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 // 开始登录
 chat.login({userID: '1434048604182233090', userSig: 'eJw9jr0OgjAUhd*lq4bc0tummDi4sIBR1IWRlAI3CEFERI3vroBxPD-fyXmxU3h07NBQa9mKS1RSASwnt7ctWzHXATbra1omTUPpt4cAQiut5ZxQauuOMpoAjgIBtQLk2nWFAO8-QPmYl5uiXhySwA*HgEf94x4V51tsKrPLnvm215R35rL3SxOvf2BH1fhOeShBcO69P2lZNIc_'});
 
 const send=(type, to, payload)=> {
 let message = chat.createTextMessage({
-  to: '1430829915148386305',
+  to: '1434048604853321730',
   conversationType: TencentCloudChat.TYPES.CONV_C2C,
   // 消息优先级，用于群聊。如果某个群的消息超过了频率限制，后台会优先下发高优先级的消息
   // priority: TencentCloudChat.TYPES.MSG_PRIORITY_NORMAL,
   payload: {
-    text: JSON.stringify({"messageType":900,"data":""})
+    text: JSON.stringify({"messageType":900,"data":"消息"})
   },
   // 如果您发消息需要已读回执，需购买旗舰版套餐，并且创建消息时将 needReadReceipt 设置为 true
   needReadReceipt: true
@@ -157,7 +146,6 @@ promise.then(function(imResponse) {
 });
 
     }
-  // sound.stop();
  
 
 const answerTheJump=()=>{

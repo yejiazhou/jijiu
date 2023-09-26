@@ -130,7 +130,7 @@
             附近医院
           </span>
           <span class="FirstMedicalUniversity">
-            <el-button color="#479ea7" style="color:#fff;font-size:23px">
+            <el-button color="#479ea7" style="color:#fff;font-size:23px" @click="send">
             第一医大<el-icon class="el-icon--right"><PhoneFilled /></el-icon>
           </el-button>
             <el-button color="#479ea7" style="color:#fff;font-size:23px">
@@ -139,6 +139,12 @@
             <el-button color="#479ea7" style="color:#fff;font-size:23px">
             第五医院<el-icon class="el-icon--right"><PhoneFilled /></el-icon>
           </el-button>
+          </span>
+          <span class="FirstMedicalUniversityres" v-if="waitingBeAnswered">
+            <span class="AnsweringClass">第一医大正在接听中…</span>
+            <span class="loadingClass">
+              <img src="../assets/loading.gif" alt="" style="width:100%;height:100%">
+            </span>
           </span>
         </span>
         <span class="contactInformation">
@@ -202,6 +208,90 @@ import { ElMessage } from 'element-plus';
 import { PhoneFilled } from '@element-plus/icons-vue'
 
 import type { TabsPaneContext } from 'element-plus'
+import { useRoute,useRouter } from 'vue-router';
+
+import TencentCloudChat from '@tencentcloud/chat';
+
+const route = useRoute()
+
+const waitingBeAnswered = ref(false)
+
+let options = {
+  SDKAppID: 1400386885 // 接入时需要将0替换为您的即时通信 IM 应用的 SDKAppID
+};
+// 创建 SDK 实例，`TIM.create()`方法对于同一个 `SDKAppID` 只会返回同一份实例
+var chat = TencentCloudChat.create(options); // SDK 实例通常用 chat 表示
+
+
+chat.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
+
+
+// 监听事件，例如：
+chat.on(TencentCloudChat.EVENT.SDK_READY, function (event) {
+// 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
+// event.name - TIM.EVENT.SDK_READY
+console.log(event.name,'eventname');
+
+    });
+
+// 开始登录
+chat.login({userID: '1434048604182233090', userSig: 'eJw9jr0OgjAUhd*lq4bc0tummDi4sIBR1IWRlAI3CEFERI3vroBxPD-fyXmxU3h07NBQa9mKS1RSASwnt7ctWzHXATbra1omTUPpt4cAQiut5ZxQauuOMpoAjgIBtQLk2nWFAO8-QPmYl5uiXhySwA*HgEf94x4V51tsKrPLnvm215R35rL3SxOvf2BH1fhOeShBcO69P2lZNIc_'});
+
+// 120咨询医院 是否可以接听
+const send=()=> {
+let message = chat.createTextMessage({
+  to: '1434048604853321730',
+  conversationType: TencentCloudChat.TYPES.CONV_C2C,
+  // 消息优先级，用于群聊。如果某个群的消息超过了频率限制，后台会优先下发高优先级的消息
+  // priority: TencentCloudChat.TYPES.MSG_PRIORITY_NORMAL,
+  payload: {
+    text: JSON.stringify({"messageType":900,"data":'咨询医院是否接听'})
+  },
+  // 如果您发消息需要已读回执，需购买旗舰版套餐，并且创建消息时将 needReadReceipt 设置为 true
+  needReadReceipt: true
+  // 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）
+  // cloudCustomData: 'your cloud custom data'
+});
+// 2. 发送消息
+let promise = chat.sendMessage(message);
+promise.then(function(imResponse) {
+  // 发送成功
+  console.log(imResponse,'发送成功');
+  waitingBeAnswered.value = true
+}).catch(function(imError) {
+  // 发送失败
+  console.warn('sendMessage error:', imError);
+});
+
+    }
+
+// 确认医院可以接听 再发送房间号过去
+const sendTwo=()=> {
+let message = chat.createTextMessage({
+  to: '1434048604853321730',
+  conversationType: TencentCloudChat.TYPES.CONV_C2C,
+  // 消息优先级，用于群聊。如果某个群的消息超过了频率限制，后台会优先下发高优先级的消息
+  // priority: TencentCloudChat.TYPES.MSG_PRIORITY_NORMAL,
+  payload: {
+    text: JSON.stringify({"messageType":900,"data":route.query?.page})
+  },
+  // 如果您发消息需要已读回执，需购买旗舰版套餐，并且创建消息时将 needReadReceipt 设置为 true
+  needReadReceipt: true
+  // 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）
+  // cloudCustomData: 'your cloud custom data'
+});
+// 2. 发送消息
+let promise = chat.sendMessage(message);
+promise.then(function(imResponse) {
+  // 发送成功
+  console.log(imResponse,'发送成功');
+  // userLeaves()
+}).catch(function(imError) {
+  // 发送失败
+  console.warn('sendMessage error:', imError);
+});
+
+    }
 
 const isFullScreen = ref(false)
 
@@ -233,7 +323,10 @@ const Screenshot = ()=>{
 ElMessage({ message: '截屏成功', type: 'success' });
 }
 
-
+($bus as any).on('SendTheRoomNumber', async (event: any) => {
+  // 发送房间号
+    sendTwo()
+});
 
 ($bus as any).on('stream-subscribed', async (event: any) => {
   const remoteStream = event.stream;
@@ -298,6 +391,17 @@ onUnmounted(()=>{
 
 .textcolor
   color:#479ea7
+
+.loadingClass
+  width: 30px
+
+.AnsweringClass
+  font-size: 30px
+
+.FirstMedicalUniversityres
+  margin-top:  20px
+  display: flex
+  align-items: center
 
 .FirstMedicalUniversity
   margin-top:  20px

@@ -167,13 +167,19 @@ async function createLocalStream() {
     addFailedLog(`LocalStream failed to initialize. Error: ${error.message_}`);
   }
 }
+($bus as any).on('mmm', async (msg: any) => {
+  console.log(msg,'msgmsgmsgmsg');
+});
+// 离开自己房间
+($bus as any).on('LeaveTheRoom', async (msg: any) => {
+  handleLeave()
+});
 
 onMounted(() => {
       handleJoin()
     })
-// onBeforeUnmount(()=>{
-//   handleLeave()
-// })
+
+
 
 async function handleJoin() {
   store.sdkAppId = '1400386885'

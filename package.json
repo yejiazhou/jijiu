@@ -15,7 +15,7 @@
     "core-js": "^3.8.3",
     "element-plus": "^2.1.10",
     "howler": "^2.2.3",
-    "mitt": "^3.0.0",
+    "mitt": "^3.0.1",
     "pinia": "^2.0.13",
     "trtc-js-sdk": "latest",
     "vue": "^3.2.13",
