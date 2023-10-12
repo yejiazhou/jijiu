@@ -57,7 +57,14 @@
                   <div>
                     性别:男 <br>
                     身高:1.75 <br>
-                    社保状态:社保、商保
+                    社保状态:
+                    <span style="color:#61d175;">
+                      社保
+                    </span> 、
+                    <span style="color:#3f74f6;">
+                      商保
+                    </span>
+                    
                   </div>
                   <div>
                     出生日期:1956年5月1日 <br>
@@ -82,7 +89,13 @@
                   <div>
                     性别:女 <br>
                     身高:1.65 <br>
-                    社保状态:社保、商保
+                    社保状态:                    
+                    <span style="color:#61d175;">
+                      社保
+                    </span> 、
+                    <span style="color:#3f74f6;">
+                      商保
+                    </span>
                   </div>
                   <div>
                     出生日期:1959年5月1日 <br>
@@ -106,7 +119,13 @@
                   <div>
                     性别:男 <br>
                     身高:1.85 <br>
-                    社保状态:社保、商保
+                    社保状态:
+                    <span style="color:#61d175;">
+                      社保
+                    </span> 、
+                    <span style="color:#3f74f6;">
+                      商保
+                    </span>
                   </div>
                   <div>
                     出生日期:1984年5月1日 <br>
@@ -535,5 +554,37 @@ onUnmounted(()=>{
     margin 0 10px 10px 0
     position relative
     margin-right: 0;
+
+@media (max-width: 1700px)
+  .remote
+    width 65%
+    min-height 100px
+    margin 0 10px 10px 0
+    position relative
+  .contactInformation
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -31vh;
+    display: flex
+    flex-direction: column
+    // background: #f00;
+  .fontsize
+    font-size: 13px
+    background: #fff
+    padding: 2px
+  .textfamilyClass
+    font-size: 23px
+    color: #7d7f7e
+  .textMemberList
+    margin: 8px 0
+    background: #fff;
+    height: 48vh
+  .isFullScreenClass
+      width: 100vw;
+      height: 76vh;
+      min-height: 100px;
+      margin: 0 10px 10px 0;
+      position: relative;
 
 </style>
