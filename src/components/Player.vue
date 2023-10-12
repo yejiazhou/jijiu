@@ -58,13 +58,10 @@
                     性别:男 <br>
                     身高:1.75 <br>
                     社保状态:
-                    <span style="color:#61d175;">
+                    <el-button type="success">
                       社保
-                    </span> 、
-                    <span style="color:#3f74f6;">
-                      商保
-                    </span>
-                    
+                    </el-button>
+                    <el-button type="primary">商保</el-button>
                   </div>
                   <div>
                     出生日期:1956年5月1日 <br>
@@ -90,12 +87,10 @@
                     性别:女 <br>
                     身高:1.65 <br>
                     社保状态:                    
-                    <span style="color:#61d175;">
+                    <el-button type="success">
                       社保
-                    </span> 、
-                    <span style="color:#3f74f6;">
-                      商保
-                    </span>
+                    </el-button>
+                    <el-button type="primary">商保</el-button>
                   </div>
                   <div>
                     出生日期:1959年5月1日 <br>
@@ -120,12 +115,10 @@
                     性别:男 <br>
                     身高:1.85 <br>
                     社保状态:
-                    <span style="color:#61d175;">
+                    <el-button type="success">
                       社保
-                    </span> 、
-                    <span style="color:#3f74f6;">
-                      商保
-                    </span>
+                    </el-button>
+                    <el-button type="primary">商保</el-button>
                   </div>
                   <div>
                     出生日期:1984年5月1日 <br>
