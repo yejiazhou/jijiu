@@ -223,6 +223,8 @@ import type { TabsPaneContext } from 'element-plus'
 import { useRoute,useRouter } from 'vue-router';
 
 import TencentCloudChat from '@tencentcloud/chat';
+import dayjs from 'dayjs' // ES 2015
+
 
 const route = useRoute()
 
@@ -318,10 +320,10 @@ const store = appStore();
 
 const $bus = inject('$bus');
 
-const currentTime = ref(new Date().toLocaleTimeString()); // 初始化当前时间
+const currentTime = ref(dayjs().format('YYYY-MM-DD HH:mm:ss')); // 初始化当前时间
 
 const updateCurrentTime = () => {
-  currentTime.value = new Date().toLocaleTimeString(); // 更新当前时间
+  currentTime.value = dayjs().format('YYYY-MM-DD HH:mm:ss'); // 更新当前时间
 };
 
 // 在组件被挂载后，使用定时器每秒更新当前时间
