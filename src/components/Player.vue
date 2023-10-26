@@ -57,9 +57,9 @@
                   <div>
                     性别:男 <br>
                     身高:1.75 <br>
-                    社保状态:
+                    保险状态:
                     <el-button type="success">
-                      社保
+                      医保
                     </el-button>
                     <el-button type="primary">商保</el-button>
                   </div>
@@ -86,9 +86,9 @@
                   <div>
                     性别:女 <br>
                     身高:1.65 <br>
-                    社保状态:                    
+                    保险状态:                    
                     <el-button type="success">
-                      社保
+                      医保
                     </el-button>
                     <el-button type="primary">商保</el-button>
                   </div>
@@ -114,9 +114,9 @@
                   <div>
                     性别:男 <br>
                     身高:1.85 <br>
-                    社保状态:
+                    保险状态:
                     <el-button type="success">
-                      社保
+                      医保
                     </el-button>
                     <el-button type="primary">商保</el-button>
                   </div>
@@ -169,37 +169,46 @@
             <span class='textcolor'>
               牡丹亭花园3栋901
             </span>
-          </span> 
-          <span class="fontsize">
+          <span class="fontsize paddingClass">
             物业公司:
             <span class='textcolor'>
               牡丹亭物业
             </span>
           </span>
+          </span> 
+
           <span class="fontsize">
             监控室电话:
             <span class='textcolor'>
               55555555
             </span>
-          </span>
-          <span class="fontsize">
+          <span class="fontsize shequClass">
             社区:
             <span class='textcolor'>
               花园街道,牡丹社区
             </span>
           </span>
+          </span>
+
           <span class="fontsize">
             电话:
             <span class='textcolor'>
               88888888
             </span>
-          </span>
-          <span class="fontsize">
+          <span class="fontsize wanggeClass">
             网格员:
             <span class='textcolor'>
               小王
             </span>
           </span>
+          <span class="fontsize jiatingClass">
+            家庭电话:
+            <span class='textcolor'>
+              138000000000
+            </span>
+          </span>
+          </span>
+
           </span> 
           <span >
 
@@ -398,11 +407,19 @@ onUnmounted(()=>{
 </style>
 
 <style lang='stylus' scoped>
+
 .fontsize
-  font-size: 19px
+  font-size: 30px
   background: #fff
   padding: 2px
-
+.paddingClass
+  padding-left: 15rem;
+.shequClass
+  padding-left: 19rem;
+.wanggeClass
+  padding-left: 4rem;
+.jiatingClass
+  padding-left: 4rem;
 .textcolor
   color:#479ea7
 
@@ -466,7 +483,7 @@ onUnmounted(()=>{
   width: 55vw;
   position: absolute;
   left: 0;
-  bottom: -31vh;
+  bottom: -28vh;
   display: flex
   flex-direction: column
   // background: #f00;
@@ -551,6 +568,7 @@ onUnmounted(()=>{
     margin-right: 0;
 
 @media (max-width: 1700px)
+
   .remote
     width 65%
     min-height 100px
@@ -560,14 +578,18 @@ onUnmounted(()=>{
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: -31vh;
+    bottom: -27vh;
     display: flex
     flex-direction: column
     // background: #f00;
   .fontsize
-    font-size: 13px
+    font-size: 30px
     background: #fff
     padding: 2px
+  .paddingClass
+    padding-left: 3rem
+  .shequClass
+    padding-left: 7rem;
   .textfamilyClass
     font-size: 23px
     color: #7d7f7e
