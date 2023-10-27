@@ -141,14 +141,14 @@
           <span class="textfamilyClass">
             附近医院
           </span>
-          <span class="FirstMedicalUniversity">
-            <el-button color="#479ea7" style="color:#fff;font-size:23px" @click="send">
+          <span  :class="[isFullScreen ? 'FirstMedicalUniversityFull' : 'FirstMedicalUniversity']">
+            <el-button color="#479ea7" style="color:#fff;font-size:28px;padding:20px" @click="send">
             第一医大<el-icon class="el-icon--right"><PhoneFilled /></el-icon>
           </el-button>
-            <el-button color="#479ea7" style="color:#fff;font-size:23px">
+            <el-button color="#479ea7" style="color:#fff;font-size:28px;padding:20px" :class="[isFullScreen ? 'marginClassClassFull' : 'marginClassClass']">
             中医院<el-icon class="el-icon--right"><PhoneFilled /></el-icon>
           </el-button>
-            <el-button color="#479ea7" style="color:#fff;font-size:23px">
+            <el-button color="#479ea7" style="color:#fff;font-size:28px;padding:20px">
             第五医院<el-icon class="el-icon--right"><PhoneFilled /></el-icon>
           </el-button>
           </span>
@@ -165,49 +165,47 @@
             联系方式
           </span>  
           <span class="fontsize">
-            具体地址: 
+            地址: 
             <span class='textcolor'>
               牡丹亭花园3栋901
             </span>
-          <span class="fontsize paddingClass">
-            物业公司:
-            <span class='textcolor'>
-              牡丹亭物业
-            </span>
-          </span>
           </span> 
-
           <span class="fontsize">
             监控室电话:
             <span class='textcolor'>
-              55555555
+              5555 5555
             </span>
-          <span class="fontsize shequClass">
+
+          </span>
+          <span class="fontsize">
             社区:
             <span class='textcolor'>
-              花园街道,牡丹社区
+              花园街道, 牡丹社区
             </span>
           </span>
-          </span>
-
           <span class="fontsize">
             电话:
             <span class='textcolor'>
-              88888888
+              3333 3333
             </span>
-          <span class="fontsize wanggeClass">
+
+
+          </span>
+          <span class="fontsize">
             网格员:
             <span class='textcolor'>
-              小王
+              张三, 133 000 000 00
             </span>
           </span>
-          <span class="fontsize jiatingClass">
-            家庭电话:
+            <span class="fontsize">
+            紧急联系人:
             <span class='textcolor'>
-              138000000000
+              王五 151 333 333 33
             </span>
           </span>
-          </span>
+
+
+
 
           </span> 
           <span >
@@ -409,7 +407,7 @@ onUnmounted(()=>{
 <style lang='stylus' scoped>
 
 .fontsize
-  font-size: 30px
+  font-size: 25px
   background: #fff
   padding: 2px
 .paddingClass
@@ -436,7 +434,15 @@ onUnmounted(()=>{
 
 .FirstMedicalUniversity
   margin-top:  20px
-
+.FirstMedicalUniversityFull
+  margin-top:  20px
+  display: flex
+  align-items: flex-start
+  flex-direction: column
+.marginClassClass
+  margin: 0 3rem
+.marginClassClassFull
+  margin: 1rem 0
 .lowerMargin
   margin-top: 20px
   padding: 0 15px
@@ -471,7 +477,7 @@ onUnmounted(()=>{
   margin-top: 12px
 
 .textfamilyClass
-  font-size: 28px
+  font-size: 24px
   color: #7d7f7e
 
 .bottomClass
@@ -480,10 +486,10 @@ onUnmounted(()=>{
   justify-content: center
 
 .contactInformation
-  width: 55vw;
+  width: 100%;
   position: absolute;
   left: 0;
-  bottom: -28vh;
+  bottom: -36vh;
   display: flex
   flex-direction: column
   // background: #f00;
@@ -554,7 +560,7 @@ onUnmounted(()=>{
   padding: 15px;
 
 .remote
-  width 75%
+  width 66%
   min-height 100px
   margin 0 10px 10px 0
   position relative
@@ -578,12 +584,12 @@ onUnmounted(()=>{
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: -27vh;
+    bottom: -39vh;
     display: flex
     flex-direction: column
     // background: #f00;
   .fontsize
-    font-size: 30px
+    font-size: 27px
     background: #fff
     padding: 2px
   .paddingClass
