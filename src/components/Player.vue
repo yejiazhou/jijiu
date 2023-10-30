@@ -609,5 +609,12 @@ onUnmounted(()=>{
       min-height: 100px;
       margin: 0 10px 10px 0;
       position: relative;
+@media (max-width: 1450px)
+  .fontsize
+    font-size: 23px;
+    background: #fff;
+    padding: 2px;
+.marginClassClass
+  margin: 0 
 
 </style>
